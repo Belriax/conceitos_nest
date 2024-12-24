@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 // import { ConceitosManualModule } from './conceitos-manual/conceitos-manual.module';
 import { RecadosModule } from './recados/recados.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { PessoaModule } from './pessoa/pessoa.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       synchronize: true, //sincroniza com o db, não deve ser usado em produção.
     }),
     RecadosModule,
+    PessoaModule,
     // ConceitosAutomaticosModule,
     // ConceitosManualModule,
   ],
