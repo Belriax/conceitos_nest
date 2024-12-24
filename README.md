@@ -22,78 +22,153 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Conceitos NestJS
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este repositório explora conceitos fundamentais do framework **NestJS**, oferecendo exemplos claros e organizados de boas práticas de desenvolvimento.
 
-## Project setup
+---
 
-```bash
-$ npm install
+## 📋 Funcionalidades
+
+- Demonstração da estrutura modular do **NestJS**.
+- Exemplos de módulos, serviços, controladores e DTOs.
+- Modularização prática com os seguintes componentes:
+  - **Pessoa**: Gestão de informações relacionadas a pessoas.
+  - **Recados**: Gerenciamento de recados ou mensagens.
+  - **Conceitos Automáticos** e **Conceitos Manuais**: Exemplos de abstração e organização.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- **NestJS**: Framework para construção de aplicações Node.js escaláveis.
+- **TypeScript**: Linguagem com tipagem estática para maior confiabilidade.
+- **Docker**: Ambiente de containerização para desenvolvimento isolado.
+- **Jest**: Framework de testes para validação de funcionalidade e integração.
+
+---
+
+## 📂 Estrutura do Projeto
+
+```plaintext
+src/
+├── conceitos-automaticos/       # Módulo: Conceitos Automáticos
+├── conceitos-manual/            # Módulo: Conceitos Manuais
+├── pessoa/                      # Módulo: Pessoa
+│   ├── pessoa.controller.ts     # Controlador do módulo "Pessoa"
+│   ├── pessoa.module.ts         # Declaração do módulo "Pessoa"
+│   ├── pessoa.service.ts        # Serviço do módulo "Pessoa"
+│   └── dto/                     # DTOs do módulo "Pessoa"
+├── recados/                     # Módulo: Recados
+│   ├── recados.controller.ts    # Controlador do módulo "Recados"
+│   ├── recados.module.ts        # Declaração do módulo "Recados"
+│   ├── recados.service.ts       # Serviço do módulo "Recados"
+│   └── dto/                     # DTOs do módulo "Recados"
+├── app.controller.ts            # Controlador principal
+├── app.module.ts                # Módulo principal
+├── app.service.ts               # Serviço principal
+└── main.ts                      # Ponto de entrada da aplicação
+
+test/                            # Testes unitários e de integração
 ```
 
-## Compile and run the project
+---
+
+## 📦 Como Executar o Projeto
+
+### 1. Clone o Repositório
 
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+git clone https://github.com/Belriax/conceitos_nest.git
+cd conceitos_nest
 ```
 
-## Run tests
+### 2. Instale as Dependências
 
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm install
 ```
 
-## Deployment
+### 3. Configure as Variáveis de Ambiente
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Crie um arquivo `.env` com as configurações necessárias (porta, banco de dados, etc.).
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 4. Execute o Projeto
+
+Modo desenvolvimento:
 
 ```bash
-$ npm install -g mau
-$ mau deploy
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+Modo produção:
 
-## Resources
+```bash
+npm run start:prod
+```
 
-Check out a few resources that may come in handy when working with NestJS:
+---
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## 🧪 Testes
 
-## Support
+### Rodar os Testes Unitários
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```bash
+npm run test
+```
 
-## Stay in touch
+### Rodar os Testes de Cobertura
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+```bash
+npm run test:cov
+```
 
-## License
+---
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+## 🐳 Docker
+
+### Executar a Aplicação com Docker
+
+Subir os containers:
+
+```bash
+docker-compose up -d
+```
+
+Encerrar os containers:
+
+```bash
+docker-compose down
+```
+
+---
+
+## 🔑 Endpoints
+
+### Exemplos
+
+#### Módulo Pessoa
+
+- **Listar todas as pessoas**
+  - `GET /pessoa`
+- **Criar uma nova pessoa**
+  - `POST /pessoa`
+
+#### Módulo Recados
+
+- **Listar todos os recados**
+  - `GET /recados`
+- **Criar um novo recado**
+  - `POST /recados`
+
+---
+
+## 📞 Contato
+
+- **Autor**: Gleicon Sousa dos Santos
+- **E-mail**: [gleiconsousa@gmail.com](mailto:gleiconsousa@gmail.com)
+- **GitHub**: [Belriax](https://github.com/Belriax)
+
+---
+
+Este repositório foi projetado para auxiliar desenvolvedores a compreenderem conceitos básicos e avançados do NestJS.
