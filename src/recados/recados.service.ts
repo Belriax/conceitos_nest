@@ -90,21 +90,16 @@ export class RecadosService {
   }
 
   async update(id: number, updateRecadoDto: UpdateRecadoDto) {
-    const partialUpdateRecadoDto = {
-      lido: updateRecadoDto?.lido,
-      texto: updateRecadoDto?.texto,
-    };
+    const recado = await this.findOne(id);
 
-    const recadoExistente = await this.recadoRepository.preload({
-      id,
-      ...partialUpdateRecadoDto,
-    });
+    recado.texto = updateRecadoDto?.texto ?? recado.texto;
+    recado.lido = updateRecadoDto?.lido ?? recado.lido;
 
-    if (!recadoExistente) return this.throwNotFoundError();
+    if (!recado) return this.throwNotFoundError();
 
-    await this.recadoRepository.save(recadoExistente);
+    await this.recadoRepository.save(recado);
 
-    return recadoExistente;
+    return recado;
   }
 
   async remove(id: number) {
@@ -112,6 +107,8 @@ export class RecadosService {
 
     if (!recado) return this.throwNotFoundError();
 
-    return this.recadoRepository.remove(recado);
+    await this.recadoRepository.remove(recado);
+
+    return recado;
   }
 }

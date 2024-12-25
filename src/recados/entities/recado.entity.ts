@@ -18,12 +18,12 @@ export class Recado {
   texto: string;
 
   // @Column({ type: 'varchar', length: 50 })
-  @ManyToOne(() => Pessoa)
+  @ManyToOne(() => Pessoa, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'de' })
   de: Pessoa;
 
   // @Column({ type: 'varchar', length: 50 })
-  @ManyToOne(() => Pessoa)
+  @ManyToOne(() => Pessoa, { onDelete: 'CASCADE', onUpdate: 'CASCADE' })
   @JoinColumn({ name: 'para' })
   para: Pessoa;
 

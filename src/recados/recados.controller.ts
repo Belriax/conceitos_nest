@@ -47,7 +47,7 @@ export class RecadosController {
     @Body() updateRecadoDto: UpdateRecadoDto,
   ) {
     console.log(id, updateRecadoDto);
-    return this.recadosService.update(Number(id), updateRecadoDto);
+    return this.recadosService.update(id, updateRecadoDto);
   }
 
   @Delete(':id')
