@@ -66,7 +66,7 @@ export class PessoaService {
     const pessoa = await this.findOne(id);
 
     if (!pessoa)
-      throw new NotFoundException('Pessoa não existente na base de dados');
+      throw new NotFoundException('Pessoa não existente na base de dados!');
 
     return await this.pessoaRepository.remove(pessoa);
   }
