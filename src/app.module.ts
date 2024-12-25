@@ -15,7 +15,7 @@ import { PessoaModule } from './pessoa/pessoa.module';
       port: 5432,
       username: 'postgres',
       database: 'postgres',
-      password: '#######',
+      password: 'Bemafig32##',
       autoLoadEntities: true, // carrega entidades sem precisar especifica-las
       synchronize: true, //sincroniza com o db, não deve ser usado em produção.
     }),
