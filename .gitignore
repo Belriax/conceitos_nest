@@ -4,7 +4,7 @@
 /build
 
 #db
-src/app.modules.ts
+./src/app.modules.ts
 
 # Logs
 logs
