@@ -26,6 +26,7 @@ export class ParseIntIdPipe implements PipeTransform {
       );
     }
 
+    console.log(`Executando o id: ${parseValue}`);
     return parseValue;
   }
 }
