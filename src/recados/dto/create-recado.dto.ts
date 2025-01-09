@@ -18,16 +18,4 @@ export class CreateRecadoDto {
 
   @IsPositive()
   paraId: number;
-
-  // @IsString()
-  // @IsNotEmpty()
-  // @MinLength(5)
-  // @MaxLength(50)
-  // readonly de: string;
-
-  // @IsString()
-  // @IsNotEmpty()
-  // @MinLength(5)
-  // @MaxLength(50)
-  // readonly para: string;
 }

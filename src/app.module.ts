@@ -6,16 +6,18 @@ import { AppService } from './app.service';
 import { RecadosModule } from './recados/recados.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PessoaModule } from './pessoa/pessoa.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
       database: 'postgres',
-      password: 'Bemafig32##',
+      password: '######',
       autoLoadEntities: true, // carrega entidades sem precisar especifica-las
       synchronize: true, //sincroniza com o db, não deve ser usado em produção.
     }),
