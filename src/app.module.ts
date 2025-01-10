@@ -12,19 +12,17 @@ import { ConfigModule } from '@nestjs/config';
   imports: [
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      database: 'postgres',
-      password: '######',
-      autoLoadEntities: true, // carrega entidades sem precisar especifica-las
-      synchronize: true, //sincroniza com o db, não deve ser usado em produção.
+      type: process.env.DATABASE_TYPE as 'postgres',
+      host: process.env.DATABASE_HOST,
+      port: Number(process.env.DATABASE_PORT),
+      username: process.env.DATABASE_USERNAME,
+      database: process.env.DATABASE_DATABASE,
+      password: process.env.DATABASE_PASSWORD,
+      autoLoadEntities: Boolean(process.env.DATABASE_AUTOLOADENTITIES), // carrega entidades sem precisar especifica-las
+      synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE), //sincroniza com o db, não deve ser usado em produção.
     }),
     RecadosModule,
     PessoaModule,
-    // ConceitosAutomaticosModule,
-    // ConceitosManualModule,
   ],
   controllers: [AppController],
   providers: [AppService],
