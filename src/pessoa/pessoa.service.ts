@@ -1,5 +1,6 @@
 import {
   ConflictException,
+  ForbiddenException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -86,7 +87,11 @@ export class PessoaService {
       ...dadosPessoa,
     });
 
-    if (!pessoa) throw new NotFoundException('Pessoan não encontrada!');
+    if (!pessoa) throw new NotFoundException('Pessoa não encontrada!');
+
+    if (pessoa.id !== tokenPayload.sub) {
+      throw new ForbiddenException('Você não é essa pessoa.');
+    }
 
     return this.pessoaRepository.save(pessoa);
   }
@@ -96,6 +101,10 @@ export class PessoaService {
 
     if (!pessoa)
       throw new NotFoundException('Pessoa não existente na base de dados!');
+
+    if (pessoa.id !== tokenPayload.sub) {
+      throw new ForbiddenException('Você não é essa pessoa');
+    }
 
     return await this.pessoaRepository.remove(pessoa);
   }
