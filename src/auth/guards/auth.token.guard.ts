@@ -25,7 +25,7 @@ export class AuthTokenGuard implements CanActivate {
 
     if (!token) {
       throw new UnauthorizedException(
-        'Não logado, entre com suas credenciais!',
+        'Usuário não logado, faça login para continuar!',
       );
     }
 
@@ -44,12 +44,12 @@ export class AuthTokenGuard implements CanActivate {
   }
 
   extractTokenFromHeader(request: Request): string | undefined {
-    const authoriaztion = request.headers?.authorization;
+    const authorization = request.headers?.authorization;
 
-    if (!authoriaztion || typeof authoriaztion !== 'string') {
+    if (!authorization || typeof authorization !== 'string') {
       return;
     }
 
-    return authoriaztion.split(' ')[1];
+    return authorization.split(' ')[1];
   }
 }
