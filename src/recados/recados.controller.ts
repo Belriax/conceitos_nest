@@ -9,6 +9,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 import { RecadosService } from './recados.service';
@@ -17,6 +18,9 @@ import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { TimingConncetionInterceptor } from 'src/common/interceptors/timing-connection-interceptor';
+import { AuthTokenGuard } from 'src/auth/guards/auth.token.guard';
+import { TokenPayloadParam } from 'src/auth/params/token-payload.param';
+import { TokenPayloadDto } from 'src/auth/dto/token-payload.dto';
 
 @Controller('recados')
 export class RecadosController {
@@ -39,18 +43,31 @@ export class RecadosController {
     return this.recadosService.findOne(+id);
   }
 
+  @UseGuards(AuthTokenGuard)
   @Post()
-  create(@Body() createRecadoDto: CreateRecadoDto) {
-    return this.recadosService.create(createRecadoDto);
+  create(
+    @Body() createRecadoDto: CreateRecadoDto,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
+  ) {
+    return this.recadosService.create(createRecadoDto, tokenPayload);
   }
 
+  @UseGuards(AuthTokenGuard)
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateRecadoDto: UpdateRecadoDto) {
-    return this.recadosService.update(id, updateRecadoDto);
+  update(
+    @Param('id') id: number,
+    @Body() updateRecadoDto: UpdateRecadoDto,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
+  ) {
+    return this.recadosService.update(id, updateRecadoDto, tokenPayload);
   }
 
+  @UseGuards(AuthTokenGuard)
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.recadosService.remove(Number(id));
+  remove(
+    @Param('id') id: string,
+    @TokenPayloadParam() tokenPayload: TokenPayloadDto,
+  ) {
+    return this.recadosService.remove(Number(id), tokenPayload);
   }
 }
