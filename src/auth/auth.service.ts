@@ -35,18 +35,30 @@ export class AuthService {
       throw new UnauthorizedException('Usuário ou senha inválido');
     }
 
-    const accessToken = await this.signJwtAsync<Partial<Pessoa>>(
+    return this.createTokens(pessoa);
+  }
+
+  private async createTokens(pessoa: Pessoa) {
+    const accessTokenPromisse = this.signJwtAsync<Partial<Pessoa>>(
       pessoa.id,
       this.jwtConfiguration.jwtTtl,
       { email: pessoa.email },
     );
 
-    const refreshToken = await this.signJwtAsync(
+    const refreshTokenPromise = this.signJwtAsync(
       pessoa.id,
       this.jwtConfiguration.jwtRefreshTtl,
     );
 
-    return { accessToken, refreshToken };
+    const [accessToken, refreshToken] = await Promise.all([
+      accessTokenPromisse,
+      refreshTokenPromise,
+    ]);
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 
   private async signJwtAsync<T>(sub: number, expiresIn: number, payload?: T) {
@@ -64,7 +76,23 @@ export class AuthService {
     );
   }
 
-  refreshTokens(refreshTokenDto: RefreshTokenDto) {
-    return refreshTokenDto;
+  async refreshTokens(refreshTokenDto: RefreshTokenDto) {
+    try {
+      const { sub } = await this.jwtService.verifyAsync(
+        refreshTokenDto.refreshToken,
+        this.jwtConfiguration,
+      );
+
+      const pessoa = await this.pessoaRepository.findOneBy({
+        id: sub,
+      });
+      if (!pessoa) {
+        throw new Error('Pessoa não encontrada,');
+      }
+
+      return this.createTokens(pessoa);
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
+    }
   }
 }
